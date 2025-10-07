@@ -19,7 +19,8 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Enum as SQLEnum
 import uuid
 from app.core.database import Base
-# if TYPE_CHECKING:
+if TYPE_CHECKING:
+    from app.api.v1.expenses.models import Expense  # Avoid circular import
 
 
 class Role(str, Enum):
@@ -61,6 +62,7 @@ class User(Base):
     two_factor_confirmation: Mapped[Optional["TwoFactorConfirmation"]] = relationship(
         back_populates="user", uselist=False, cascade="all, delete-orphan"
     )
+    expenses: Mapped[List["Expense"]] = relationship(back_populates="user", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<User {self.first_name} {self.last_name}>"

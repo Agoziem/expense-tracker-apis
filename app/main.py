@@ -1,6 +1,5 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from app.api.v1.auth.errors import register_all_errors
 from app.core.config import settings
 from app.core.routes import router as main_router
 from app.core.middleware import register_middleware
@@ -12,10 +11,10 @@ handle all the requests for the expense tracking application.
 """
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await register_all_errors(app)
-    yield
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     await register_all_errors(app)
+#     yield
 
 app = FastAPI(title=settings.PROJECT_NAME,
               description=description,
@@ -25,7 +24,7 @@ app = FastAPI(title=settings.PROJECT_NAME,
                   "url": "https://expensetracker.app",
                   "email": "support@expensetracker.app",
               },
-              lifespan=lifespan,
+            #   lifespan=lifespan,
               )
 version_prefix = "/api/v1"
 app.include_router(main_router, prefix=version_prefix)
