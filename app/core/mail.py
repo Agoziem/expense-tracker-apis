@@ -16,8 +16,8 @@ class EmailRecipient(BaseModel):
 class EmailRawHTMLContent(BaseModel):
     subject: str
     html_content: str
-    sender_name: str = "File Management App"
-    sender_email: EmailStr = "accounts@innovationscybercafe.com"
+    sender_name: str = "Expense Tracker App"
+    sender_email: EmailStr = "Accounts <onboarding@resend.dev>"
 
 # -------------------------------------------------
 # Using Resend as alternative email service

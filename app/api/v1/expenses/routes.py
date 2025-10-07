@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional, List
 import math
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Path, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import async_get_db
@@ -283,8 +283,8 @@ async def get_spending_summary(
     summary="Get monthly statistics"
 )
 async def get_monthly_statistics(
-    year: int = Query(..., ge=2000, le=2100, description="Year"),
-    month: int = Query(..., ge=1, le=12, description="Month (1-12)"),
+    year: int = Path(..., ge=2000, le=2100, description="Year"),
+    month: int = Path(..., ge=1, le=12, description="Month (1-12)"),
     current_user: UserModel = Depends(get_current_user),
     session: AsyncSession = Depends(async_get_db),
 ):
