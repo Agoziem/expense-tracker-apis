@@ -36,5 +36,5 @@ def register_middleware(app: FastAPI):
 
     app.add_middleware(
         TrustedHostMiddleware,
-        allowed_hosts=["localhost", "127.0.0.1" ,"0.0.0.0"],
+        allowed_hosts=["localhost", "127.0.0.1" ,"0.0.0.0","expense-tracker-apis-production.up.railway.app"],
     )
