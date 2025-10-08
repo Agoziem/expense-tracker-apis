@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from app.api.v1.auth.routes.routes import auth_router
+from app.api.v1.auth.routes.two_factor_routes import twoFA_router
 from app.api.v1.auth.routes.user_routes import user_router
 from app.api.v1.files.routes import file_router
 from app.api.v1.expenses.routes import expense_router
@@ -7,8 +8,11 @@ from app.api.v1.expenses.routes import expense_router
 
 router = APIRouter()
 
-# Include other routers
+# auth router
 router.include_router(auth_router, prefix="/auth", tags=["authentication"])
+
+# 2FA router
+router.include_router(twoFA_router, prefix="/2fa", tags=["2FA"])
 
 # user router and profile router
 router.include_router(user_router, prefix="/user", tags=["user"])

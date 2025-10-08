@@ -1,6 +1,6 @@
+import bcrypt
 from app.api.v1.auth.models import User
 from app.core.config import settings
-from passlib.context import CryptContext
 import logging
 import uuid
 from datetime import datetime, timedelta
@@ -8,19 +8,17 @@ from itsdangerous import URLSafeTimedSerializer
 import jwt as pyjwt
 
 
-passwd_context = CryptContext(schemes=["bcrypt"])
+# passwd_context = CryptContext(schemes=["bcrypt"]) deprecated in favor of bcrypt directly
 
 ACCESS_TOKEN_EXPIRY = settings.ACCESS_TOKEN_EXPIRY
 REFRESH_TOKEN_EXPIRY = settings.REFRESH_TOKEN_EXPIRY
 
 
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+        return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8"))
+
 def generate_passwd_hash(password: str) -> str:
-    hash = passwd_context.hash(password)
-    return hash
-
-
-def verify_password(password: str, hash: str) -> bool:
-    return passwd_context.verify(password, hash)
+        return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
 
 def create_access_token(

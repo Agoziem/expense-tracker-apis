@@ -17,7 +17,7 @@ class EmailRawHTMLContent(BaseModel):
     subject: str
     html_content: str
     sender_name: str = "Expense Tracker App"
-    sender_email: EmailStr = "Accounts <onboarding@resend.dev>"
+    sender_email: EmailStr = "accounts <onboarding@resend.dev>"
 
 # -------------------------------------------------
 # Using Resend as alternative email service
@@ -30,7 +30,8 @@ def send_resend_email(
     content: EmailRawHTMLContent
 ):
     params: resend.Emails.SendParams = {
-        "from": f"{content.sender_name} <{content.sender_email}>",
+        # "from": f"{content.sender_name} <{content.sender_email}>",
+        "from": "accounts <onboarding@resend.dev>", 
         "to": [r.email for r in recipients],
         "subject": content.subject,
         "html": content.html_content
@@ -45,7 +46,8 @@ def send_bulk_resend_email(
 ):
     params: List[resend.Emails.SendParams] = [
         {
-            "from": f"{content.sender_name} <{content.sender_email}>",
+            # "from": f"{content.sender_name} <{content.sender_email}>",
+            "from": "accounts <onboarding@resend.dev>",
             "to": [r.email],
             "subject": content.subject,
             "html": content.html_content

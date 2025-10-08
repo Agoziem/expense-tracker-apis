@@ -18,13 +18,16 @@ class ExpenseCategory(str, Enum):
     FOOD = "Food"
     TRANSPORT = "Transport"
     RENT = "Rent"
+    GROCERIES = "Groceries"
     UTILITIES = "Utilities"
     ENTERTAINMENT = "Entertainment"
     HEALTHCARE = "Healthcare"
     EDUCATION = "Education"
     SHOPPING = "Shopping"
     SAVINGS = "Savings"
-    OTHER = "Other"
+    FOODSTUFF = "Foodstuff"
+    TRAVEL = "Travel"
+    OTHERS = "Others"
 
 
 class Expense(Base):
