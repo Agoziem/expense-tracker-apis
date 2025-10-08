@@ -20,9 +20,9 @@ session = aioboto3.Session()
 async def upload_or_replace_file(file: UploadFile, key: str, replace: bool = True) -> str:
     async with session.client(
         "s3",
-        region_name="your-region",
-        aws_access_key_id="your-access-key",
-        aws_secret_access_key="your-secret-key",
+        region_name=AWS_REGION,
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     ) as s3:
         if replace:
             # Delete the existing file (ignore if not exists)
