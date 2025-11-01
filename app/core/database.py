@@ -1,6 +1,4 @@
-# pyright: strict = false
-# type: ignore
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import sessionmaker
 from .config import settings
 from sqlalchemy.ext.declarative import declarative_base
@@ -11,7 +9,7 @@ engine = create_async_engine(settings.POSTGRES_URL, echo=False)
 Base = declarative_base()
 
 # Create Async Session
-AsyncSessionLocal = sessionmaker(
+AsyncSessionLocal = async_sessionmaker(
     bind=engine, class_=AsyncSession, expire_on_commit=False
 )
 
